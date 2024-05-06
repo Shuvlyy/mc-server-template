@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Workshop Plugin Minecraft</h1>
+  <h1>🛠️ Workshop Plugin Minecraft 🛠️</h1>
 </div>
 
 ## Présentation
@@ -234,3 +234,5 @@ Si vous êtes curieux de voir à quoi ressemble un code de production d'un "vrai
 je vous invite à regarder les repos d'[Hashtek](https://github.com/hashtek-mc) et de [SamaGames](https://github.com/SamaGames).
 
 Merci d'avoir été présent pendant ce Workshop ! 🌟💜
+
+## Fait avec 💜 par [Lysandre B.](https://github.com/shuvlyy)
