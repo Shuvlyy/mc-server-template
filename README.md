@@ -15,10 +15,10 @@ En bref, tout est possible avec les plugins. C'est différent des mods, qui modi
 avec de l'imagination 😊
 
 C’est d’ailleurs avec les plugins que fonctionnent la majorité des gros serveurs aujourd’hui,
-comme Hypixel, Hashtek (😏), Minemen, anciennement Epicube, Funcraft, Mineplex…
+comme Hypixel, Minemen, Hashtek (😏), anciennement Epicube, Funcraft, Mineplex…
 
 Pour créer notre plugin, nous utiliserons l’API Spigot, qui est dérivée de Bukkit
-(et qui a donc la même utilité), car celle-ci est plus documentée.
+(et qui a donc la même utilité), car celle-ci est plus documentée, et bien plus à jour.
 Elle contient l’ensemble des fonctions et des classes dont nous nous servirons pour interagir avec notre serveur.
 
 À la fin de ce workshop, vous aurez fait une commande qui vous donne un item personnalisé, un chat personnalisé ainsi qu'une blacklist (certains blocs qu'on ne peut pas poser).
@@ -35,6 +35,10 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 
 > [!TIP]
 > Le nom des classes doit s'écrire en `PascalCase`, et le reste en `camelCase` (nom des variables...)
+
+> [!TIP]
+> N'hésitez pas à venir me voir si vous avez besoin d'aide, ne restez pas bloqué ! 😉\
+> Utilisez aussi Google, la meilleure prompt est "spigot " + votre problème !
 
 ## Prérequis
 
@@ -94,7 +98,12 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 6. Écrivons maintenant les instruction du plugin.
 
    1. Ajoutez `extends JavaPlugin` après le nom de votre classe, puis importez la classe correspondante (`Ctrl + Shift + O` par défaut).
-   2. Maintenant, collez ce bout de code à l'intérieur de votre classe :
+
+> [!WARNING]
+> Sauf indication contraire, importez toujours depuis un package qui commence par `org.bukkit` !\
+> Certaines classes se trouvent dans d'autres librairies, donc faites attention.
+
+   3. Maintenant, collez ce bout de code à l'intérieur de votre classe :
       ```java
       /**
        * Code appelé lors du lancement du serveur.
@@ -145,6 +154,14 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 `⁉️` Votre plugin ne fonctionne pas ? Vérifiez bien que votre plugin a bien été exporté dans le dossier `plugins`.\
 Regardez également la console, l'erreur est souvent explicite.
 
+> [!TIP]
+> Cliquez là dessus, ça rend l'architecture beaucoup plus claire 😉\
+> ![image](https://github.com/Shuvlyy/workshop-plugin-mc/assets/123988037/85ae56f6-71e6-4c1e-9822-6dd73898559b)
+
+## Création de commandes
+
+...
+
 ## Gestion d'événements
 
 Sur Minecraft, il se passe ce qu'on appelle des events (des événements). À chaque action faite sur le serveur, un événement est appelé.
@@ -153,3 +170,28 @@ Sur Minecraft, il se passe ce qu'on appelle des events (des événements). À ch
 - Un message est envoyé ? `AsyncPlayerChatEvent` est appelé.
 
 Il existe beaucoup d'events, dont la liste se trouve [ici](https://helpch.at/docs/1.8/org/bukkit/event/class-use/Event.html).
+
+Implémentons un petit `Listener` (une classe qui écoute des events) pour exécuter quelques trucs quand un joueur rejoint notre serveur.
+
+1. Créez un sous-package qu'on va nommer `listener` (clic droit sur le package principal > New > Package)
+
+2. Dans ce sous-package, créez une nouvelle classe nommée `ListenerJoin` (format général: `Listener<nom_de_l'événement>`)
+
+3. Ajoutez `implements Listener` après le nom de votre classe, puis importez la classe correspondante.
+
+## Vos devoirs
+
+- Quand un joueur rejoint / quitte le serveur, modifiez le message envoyé par défaut par celui de votre choix (il doit inclure le pseudo du joueur !).
+- Quand un joueur envoie un message dans le chat, modifiez le formattage par défaut (doit inclure le pseudo du joueur et le message qu'il a envoyé !).
+- Quand un joueur pose un bloc "interdit" (ceux que vous voulez, de la pierre par exemple), annulez la pose et lui envoyez lui un message pour lui dire que ce bloc est "interdit".
+- Faites une commande "/customgive" qui donne une épée en fer avec les caractéristiques suivantes :
+  - Nom : `Excalibur` (en rouge)
+  - Enchantments : Sharpness 2, Unbreaking 3
+  - Incassable
+
+## Outro
+
+Si vous êtes curieux de voir à quoi ressemble un code de production d'un "vrai" serveur Minecraft,
+je vous invite à regarder les repos d'[Hashtek](https://github.com/hashtek-mc) et de [SamaGames](https://github.com/SamaGames).
+
+Merci d'avoir été présent pendant ce Workshop ! 🌟💜
