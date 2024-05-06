@@ -60,7 +60,7 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 2. Pour lancer le serveur, exécutez la commande `java -jar spigot.jar`.\
    Lancez le une première fois.
 
-3. Vous verrez que le serveur ne démarre pas tout de suite. Pour continuer, il faut accepter les conditions d'utilisation de Mojang, les EULA.\
+3. Vous verrez que le serveur refuse de démarrer. Pour continuer, il faut accepter les conditions d'utilisation de Mojang, les EULA.\
    Pour ce faire, allez dans le fichier `eula.txt` et remplacez le `false` par `true`.
 
 4. Relancez le serveur. Tous les fichiers vont se créer, dont le monde, qui peut prendre un peu de temps (tout dépend de la puissance de votre PC).
