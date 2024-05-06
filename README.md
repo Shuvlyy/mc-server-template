@@ -32,7 +32,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 > et remplacez le `spigot.jar` présent dans votre serveur (gardez le nom `spigot.jar`‼️). Faites attention à la version de Java à utiliser !
 
 > [!TIP]
-> Le nom des classes doit s'écrire en `PascalCase`, et le reste en `camelCase` (nom des variables...)
+> Le nom des classes doit s'écrire en `PascalCase`, les packages en `lowercase` et le reste en `camelCase` (nom des variables...)
 
 > [!TIP]
 > N'hésitez pas à venir me voir si vous avez besoin d'aide, ne restez pas bloqué ! 😉\
