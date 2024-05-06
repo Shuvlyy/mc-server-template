@@ -93,7 +93,7 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
    1. Ajoutez le fichier `spigot.jar` présent dans votre serveur dans les archives externes (clic droit sur votre projet > Build Path > Add External Archives...)
    2. Et voilà ! Spigot est maintenant utilisable.
 
-6. Écrivons maintenant les instruction du plugin :
+6. Écrivons maintenant les instructions basiques du plugin :
    - Une fonction de type `void` appelée `onEnable` (avec le décorateur `Override`) qui sera appelée au lancement du serveur
    - La même fonction mais appelée `onDisable`, qui sera appelée à l'arrêt du serveur
 ```java
