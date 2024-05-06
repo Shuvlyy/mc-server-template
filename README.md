@@ -12,7 +12,7 @@ lorsque l’on exécutera une commande donnée (par exemple `/broadcast <message
 
 En bref, tout est possible avec les plugins. C'est différent des mods, qui modifient directement le jeu
 (donc là on peut ajouter directement des nouveaux items, avec des textures personnalisées), mais on peut faire globalement ce qu'on veut avec des plugins,
-avec de l'imagination 😊
+avec de l'imagination ! 😊
 
 C’est d’ailleurs avec les plugins que fonctionnent la majorité des gros serveurs aujourd’hui,
 comme Hypixel, Minemen, Hashtek (😏), anciennement Epicube, Funcraft, Mineplex…
@@ -21,11 +21,9 @@ Pour créer notre plugin, nous utiliserons l’API Spigot, qui est dérivée de 
 (et qui a donc la même utilité), car celle-ci est plus documentée, et bien plus à jour.
 Elle contient l’ensemble des fonctions et des classes dont nous nous servirons pour interagir avec notre serveur.
 
-À la fin de ce workshop, vous aurez fait une commande qui vous donne un item personnalisé, un chat personnalisé ainsi qu'une blacklist (certains blocs qu'on ne peut pas poser).
+À la fin de ce workshop, vous saurez faire une commande qui vous donne un item personnalisé, un chat personnalisé ainsi qu'une blacklist de blocs (certains blocs qu'on ne peut pas poser).
 
 ## Disclaimer
-
-Si vous ne connaissez pas le Java, pas de panique, nous sommes là pour apprendre ! 😊
 
 Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’écrans seront faites avec Windows.
 
@@ -65,7 +63,7 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 3. Vous verrez que le serveur ne démarre pas tout de suite. Pour continuer, il faut accepter les conditions d'utilisation de Mojang, les EULA.\
    Pour ce faire, allez dans le fichier `eula.txt` et remplacez le `false` par `true`.
 
-4. Relancez le serveur. Tous les fichiers vont se créer, dont le monde, qui peut prendre un peu de temps (tout dépend de la puissance votre PC).
+4. Relancez le serveur. Tous les fichiers vont se créer, dont le monde, qui peut prendre un peu de temps (tout dépend de la puissance de votre PC).
 
 5. Une fois terminé, il y aura une ligne avec écrit "Done".\
    Pour accéder à votre tout nouveau serveur, entrez l'IP `localhost` (ou `127.0.0.1` pour les puristes) sur votre jeu.\
@@ -151,10 +149,10 @@ Regardez également la console, l'erreur est souvent explicite.
 
 ## Gestion d'événements
 
-Sur Minecraft, il se passe ce qu'on appelle des events (des événements). À chaque action faite sur le serveur, un événement est appelé.
-- Un joueur rejoint / quitte le serveur ? `PlayerJoinEvent` / `PlayerQuitEvent` est appelé.
-- Un joueur pose un bloc ? `BlockPlaceEvent` est appelé.
-- Un message est envoyé ? `AsyncPlayerChatEvent` est appelé.
+Sur Minecraft, il se passe ce qu'on appelle des events (des événements). À chaque action faite sur le serveur, un événement est déclenché.
+- Un joueur rejoint / quitte le serveur ? `PlayerJoinEvent` / `PlayerQuitEvent` est déclenché.
+- Un joueur pose un bloc ? `BlockPlaceEvent` est déclenché.
+- Un message est envoyé ? `AsyncPlayerChatEvent` est déclenché.
 
 Il existe beaucoup d'events, dont la liste se trouve [ici](https://helpch.at/docs/1.8/org/bukkit/event/class-use/Event.html).
 
@@ -163,7 +161,7 @@ Par exemple, implémentons un petit `Listener` (une classe qui écoute des event
 1. Créez un sous-package qu'on va nommer `listener`, puis dans ce sous-package une nouvelle classe nommée `ListenerJoin` qui implémente la classe `Listener`.
 
 2. Créez une fonction de type `void` qui prend en paramètre l'event `PlayerJoinEvent` avec le décorateur `EventHandler`.\
-   C'est cette fonction qui sera appelée quand l'événement sera "tiré".\
+   C'est cette fonction qui sera appelée quand l'événement sera déclenché.\
    Ecrivez-y les instructions que vous voulez, profitez-en pour découvrir un peu la documentation et ce que vous pouvez faire !
 
 4. Maintenant, il faut dire au serveur que ce `Listener` existe.\
