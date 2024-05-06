@@ -118,8 +118,9 @@ public void onDisable()
    author: <votre_pseudo>
    main: fr.shuvly.spigot.workshop.Workshop # Adaptez cette ligne à votre nom de package.
    ```
+   Cette "identité" est consultable grâce à la commande `/version` (ou `/ver`) suivi du nom de votre plugin.
 
-8. Notre premier jet est désormais fini ! Maintenant, vérifions qu'il fonctionne bien. Exportez le plugin dans le dossier `plugins` de votre serveur.\
+9. Notre premier jet est désormais fini ! Maintenant, vérifions qu'il fonctionne bien. Exportez le plugin dans le dossier `plugins` de votre serveur.\
    Clic droit sur votre projet > Export
 
    1. En type de fichier, sélectionnez `Java/JAR file`.\
@@ -145,7 +146,42 @@ Regardez également la console, l'erreur est souvent explicite.
 
 ## Création de commandes
 
-...
+Sur Minecraft, il existe des commandes, comme `/give` pour se donner des items, `/tp` pour se téléporter à certaines coordonnées ou à un joueur, etc...
+
+Mais, avec les plugins, il est possible de créer ses propres commandes ! Créons-en une pour envoyer un message à tous les joueurs : `/broadcast`
+
+1. Créez un sous-package qu'on va nommer `command`, puis dans ce sous-package une nouvelle classe nommée `CommandBroadcast` qui implémente la classe `CommandExecutor`.\
+   Ajoutez-y les fonctions demandées (normalement, juste `onCommand`).\
+   *(le nom pré-généré des arguments n'étant pas très explicite, je vous conseille de les remplacer par `sender`, `command`, `label`, `args` respectivement)*
+
+3. Puis, dans cette fonction `onCommand`, collez-y ce bout de code :
+   ```java
+   Bukkit.broadcastMessage("Ceci est un broadcast");
+   ```
+
+> [!TIP]
+> Jouez avec les [codes couleurs](https://helpch.at/docs/1.8/index.html?org/bukkit/ChatColor.html) de Minecraft !
+
+3. Maintenant, il faut dire au serveur que cette commande existe.\
+   Pour ce faire, au lancement du serveur, appelez ce bout de code :
+   ```java
+   getCommand("broadcast").setExecutor(new CommandBroadcast());
+   //          ^ Nom de la commande        ^ Classe responsable de la commande
+   ```
+
+4. Finalement, il faut rajouter notre commande dans "l'identité" du plugin (le fichier `plugin.yml`).
+   Créez simplement une section `commands` à la fin du fichier, puis ajoutez-y le nom de votre commande. Vous pouvez même ajouter une description, une permission et plus !
+   ```yml
+   ...
+   commands:
+     broadcast:
+       description: "Envoie un message à tout le serveur."
+   ```
+   La description est accessible grâce à la commande `/help` suivi du nom de la commande (donc `/help broadcast`).
+
+5. Et voilà ! Maintenant, quand un joueur exécute la commande `/broadcast`, un message est envoyé à tous les joueurs.\
+   ![image](https://github.com/Shuvlyy/workshop-plugin-mc/assets/123988037/a88d469b-e075-4673-9459-c932ea3c6739)
+
 
 ## Gestion d'événements
 
@@ -164,7 +200,7 @@ Par exemple, implémentons un petit `Listener` (une classe qui écoute des event
    C'est cette fonction qui sera appelée quand l'événement sera déclenché.\
    Ecrivez-y les instructions que vous voulez, profitez-en pour découvrir un peu la documentation et ce que vous pouvez faire !
 
-4. Maintenant, il faut dire au serveur que ce `Listener` existe.\
+4. Maintenant, tout comme pour les commandes, il faut dire au serveur que ce `Listener` existe.\
    Pour ce faire, au lancement du serveur, il faut `register` le `Listener` dans le `PluginManager`.
 ```java
 PluginManager pluginManager = getServer().getPluginManager();
