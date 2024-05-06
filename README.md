@@ -198,7 +198,7 @@ Par exemple, implémentons un petit `Listener` (une classe qui écoute des event
 
 2. Créez une fonction de type `void` qui prend en paramètre l'event `PlayerJoinEvent` avec le décorateur `EventHandler`.\
    C'est cette fonction qui sera appelée quand l'événement sera déclenché.\
-   Ecrivez-y les instructions que vous voulez, profitez-en pour découvrir un peu la documentation et ce que vous pouvez faire !
+   Écrivez-y les instructions que vous voulez, profitez-en pour découvrir un peu la documentation et ce que vous pouvez faire !
 
 4. Maintenant, tout comme pour les commandes, il faut dire au serveur que ce `Listener` existe.\
    Pour ce faire, au lancement du serveur, il faut `register` le `Listener` dans le `PluginManager`.
