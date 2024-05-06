@@ -59,7 +59,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 ```
 
-2. Le script pour lancer le serveur est `run.sh` (ou `run.cmd` si vous êtes sur Windows).\
+2. Pour lancer le serveur, exécuter la commande `java -jar spigot.jar`.\
    Lancez le une première fois.
 
 3. Vous verrez que le serveur ne démarre pas tout de suite. Pour continuer, il faut accepter les conditions d'utilisation de Mojang, les EULA.\
@@ -73,7 +73,8 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 
 > [!TIP]
 > N'oubliez pas de vous donner les permissions d'administrateur sur votre serveur !\
-> Pour ce faire, exécutez la commande `op <pseudo>` dans la console. Pour retirer les permissions, c'est la commande `deop <pseudo>`.
+> Pour ce faire, exécutez la commande `op <pseudo>` dans la console. Pour retirer les permissions, c'est la commande `deop <pseudo>`.\
+> Pour arrêter le serveur, exécutez la commande `stop`.
 
 ## Initialisation du projet (sur Eclipse)
 
@@ -84,57 +85,43 @@ git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 > [!WARNING]
 > Faites bien attention à prendre la bonne version de Java, la `JavaSE-1.8` !
 
-2. Créez un nouveau package dans le dossier `src` (clic droit sur `src` > New > Package) :\
-   `fr.<votre_pseudo>.spigot.<le_nom_de_votre_plugin>`\
+2. Créez un nouveau package dans le dossier `src` : `fr.<votre_pseudo>.spigot.<le_nom_de_votre_plugin>`\
    Ce package sera la racine de notre plugin (voyez les packages comme des dossiers).
 
-4. Maintenant, créez une nouvelle classe Java dans le package créé qui porte le nom de votre plugin (dans notre cas, `Workshop`).
+4. Maintenant, créez une nouvelle classe Java dans le package créé qui porte le nom de votre plugin (dans notre cas, `Workshop`) et qui étend de la classe `JavaPlugin`.
 
 5. Notre structure principale est finie. Maintenant, paramétrons notre projet pour accéder à l'API de Spigot.
 
    1. Ajoutez le fichier `spigot.jar` présent dans votre serveur dans les archives externes (clic droit sur votre projet > Build Path > Add External Archives...)
    2. Et voilà ! Spigot est maintenant utilisable.
 
-6. Écrivons maintenant les instruction du plugin.
+6. Écrivons maintenant les instruction du plugin :
+   - Une fonction de type `void` appelée `onEnable` (avec le décorateur `Override`) qui sera appelée au lancement du serveur
+   - La même fonction mais appelée `onDisable`, qui sera appelée à l'arrêt du serveur
+```java
+@Override
+public void onEnable()
+{
+    System.out.println("Plugin loaded!");  // Équivalent de "console.log" en JS.
+}
 
-   1. Ajoutez `extends JavaPlugin` après le nom de votre classe, puis importez la classe correspondante (`Ctrl + Shift + O` par défaut).
-
-> [!WARNING]
-> Sauf indication contraire, importez toujours depuis un package qui commence par `org.bukkit` !\
-> Certaines classes se trouvent dans d'autres librairies, donc faites attention.
-
-   3. Maintenant, collez ce bout de code à l'intérieur de votre classe :
-      ```java
-      /**
-       * Code appelé lors du lancement du serveur.
-       */
-      @Override
-      public void onEnable()
-      {
-          System.out.println("Plugin loaded!");  // Équivalent de "printf" en C.
-      }
-
-      /**
-       * Code appelé lors de l'arrêt du serveur.
-       */
-      @Override
-      public void onDisable()
-      {
-          System.out.println("Goodbye, server... :(");
-      }
-      ```
+@Override
+public void onDisable()
+{
+    System.out.println("Goodbye, server... :(");
+}
+```
 
 7. Dernière étape avant de pouvoir tester, il faut créer "l'identité" du plugin (son nom, sa version, son auteur...).\
-   Pour ce faire, créez un fichier nommé `plugin.yml` dans le dossier `src` de votre plugin (clic droit sur `src` > New > File) et collez-y dedans ceci :
+   Pour ce faire, créez un fichier nommé `plugin.yml` dans le dossier `src` de votre plugin et collez-y dedans ceci :
    ```yml
-   name: Workshop # Nom de votre plugin
-   version: 1.0 # Version de votre plugin
-   author: <votre_pseudo> # Qui l'a créé
-   main: fr.shuvly.spigot.workshop.Workshop # Mettez ici le chemin vers la classe principale qu'on a créé précédement.
-   #  /* ^ Nom du package */    /* ^ Nom de la classe (du fichier) */
+   name: Workshop
+   version: 1.0
+   author: <votre_pseudo>
+   main: fr.shuvly.spigot.workshop.Workshop # Adaptez cette ligne à votre nom de package.
    ```
 
-9. Notre premier jet est désormais fini ! Maintenant, vérifions qu'il fonctionne bien. Exportez le plugin dans le dossier `plugins` de votre serveur.\
+8. Notre premier jet est désormais fini ! Maintenant, vérifions qu'il fonctionne bien. Exportez le plugin dans le dossier `plugins` de votre serveur.\
    Clic droit sur votre projet > Export
 
    1. En type de fichier, sélectionnez `Java/JAR file`.\
@@ -171,15 +158,28 @@ Sur Minecraft, il se passe ce qu'on appelle des events (des événements). À ch
 
 Il existe beaucoup d'events, dont la liste se trouve [ici](https://helpch.at/docs/1.8/org/bukkit/event/class-use/Event.html).
 
-Implémentons un petit `Listener` (une classe qui écoute des events) pour exécuter quelques trucs quand un joueur rejoint notre serveur.
+Par exemple, implémentons un petit `Listener` (une classe qui écoute des events) qui se chargera d'exécuter quelques trucs quand un joueur rejoint notre serveur.
 
-1. Créez un sous-package qu'on va nommer `listener` (clic droit sur le package principal > New > Package)
+1. Créez un sous-package qu'on va nommer `listener`, puis dans ce sous-package une nouvelle classe nommée `ListenerJoin` qui implémente la classe `Listener`.
 
-2. Dans ce sous-package, créez une nouvelle classe nommée `ListenerJoin` (format général: `Listener<nom_de_l'événement>`)
+2. Créez une fonction de type `void` qui prend en paramètre l'event `PlayerJoinEvent` avec le décorateur `EventHandler`.\
+   C'est cette fonction qui sera appelée quand l'événement sera "tiré".\
+   Ecrivez-y les instructions que vous voulez, profitez-en pour découvrir un peu la documentation et ce que vous pouvez faire !
 
-3. Ajoutez `implements Listener` après le nom de votre classe, puis importez la classe correspondante.
+4. Maintenant, il faut dire au serveur que ce `Listener` existe.\
+   Pour ce faire, au lancement du serveur, il faut `register` le `Listener` dans le `PluginManager`.
+```java
+PluginManager pluginManager = getServer().getPluginManager();
 
-## Vos devoirs
+pluginManager.registerEvents(new ListenerJoin(), this);
+```
+
+5. Et voilà ! Maintenant, quand un joueur se connectera sur votre serveur, le contenu de la fonction que vous avez créé sera exécuté.
+
+> [!TIP]
+> Regardez bien toutes les fonctions disponibles dans l'event (`PlayerJoinEvent`) !
+
+## 📚 Vos devoirs
 
 - Quand un joueur rejoint / quitte le serveur, modifiez le message envoyé par défaut par celui de votre choix (il doit inclure le pseudo du joueur !).
 - Quand un joueur envoie un message dans le chat, modifiez le formattage par défaut (doit inclure le pseudo du joueur et le message qu'il a envoyé !).
@@ -188,6 +188,11 @@ Implémentons un petit `Listener` (une classe qui écoute des events) pour exéc
   - Nom : `Excalibur` (en rouge)
   - Enchantments : Sharpness 2, Unbreaking 3
   - Incassable
+ 
+### Bonus
+Si vous êtes arrivés ici, je vous félicite 👏\
+Je vous encourage à aller plus loin : vous pouvez mixer tout ce que vous avez appris pour faire un mini-jeu ! Inspirez vous d'autres mini-jeux, essayez de les reproduire !\
+Les plus simples à faire sont les mini-jeux de types FFA, car aucun système de partie n'est requis.
 
 ## Outro
 
