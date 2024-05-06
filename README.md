@@ -57,7 +57,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 git clone git@github.com:Shuvlyy/workshop-plugin-mc.git
 ```
 
-2. Pour lancer le serveur, exécuter la commande `java -jar spigot.jar`.\
+2. Pour lancer le serveur, exécutez la commande `java -jar spigot.jar`.\
    Lancez le une première fois.
 
 3. Vous verrez que le serveur ne démarre pas tout de suite. Pour continuer, il faut accepter les conditions d'utilisation de Mojang, les EULA.\
