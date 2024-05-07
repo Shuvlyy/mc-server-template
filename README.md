@@ -8,7 +8,7 @@ Un plugin Minecraft est une extension du jeu, server-side, écrite en Java, perm
 modifier l’action liée à un évènement, l’annuler, ou ajouter d’autres actions personnalisées à cet évènement.
 Il est aussi possible de créer des tâches qui seront exécutées à un certain intervalle de temps, ou de créer des commandes permettant d’effectuer une action personnalisée.
 Cela nous permettrait par exemple d’empêcher un joueur de poser un bloc dans une certaine zone du monde, ou d’envoyer un message à chaque joueur connecté
-lorsque l’on exécutera une commande donnée (par exemple `/broadcast <message>`). Entre autres, c’est cet outil qui nous permettra d’établir les règles des différents mini-jeux.
+lorsque l’on exécutera une commande donnée (par exemple `/broadcast <message>`).
 
 En bref, tout est possible avec les plugins. C'est différent des mods, qui modifient directement le jeu
 (donc là on peut ajouter directement des nouveaux items, avec des textures personnalisées), mais on peut faire globalement ce qu'on veut avec des plugins,
@@ -150,7 +150,7 @@ Sur Minecraft, il existe des commandes, comme `/give` pour se donner des items, 
 
 Mais, avec les plugins, il est possible de créer ses propres commandes ! Créons-en une pour envoyer un message à tous les joueurs : `/broadcast`
 
-1. Créez un sous-package qu'on va nommer `command`, puis dans ce sous-package une nouvelle classe nommée `CommandBroadcast` qui implémente la classe `CommandExecutor`.\
+1. Créez un sous-package qu'on va nommer `command` (qui contiendra toutes nos commandes), puis dans ce sous-package une nouvelle classe nommée `CommandBroadcast` qui implémente la classe `CommandExecutor`.\
    Ajoutez-y les fonctions demandées (normalement, juste `onCommand`).\
    *(le nom pré-généré des arguments n'étant pas très explicite, je vous conseille de les remplacer par `sender`, `command`, `label`, `args` respectivement)*
 
@@ -194,7 +194,7 @@ Il existe beaucoup d'events, dont la liste se trouve [ici](https://helpch.at/doc
 
 Par exemple, implémentons un petit `Listener` (une classe qui écoute des events) qui se chargera d'exécuter quelques trucs quand un joueur rejoint notre serveur.
 
-1. Créez un sous-package qu'on va nommer `listener`, puis dans ce sous-package une nouvelle classe nommée `ListenerJoin` qui implémente la classe `Listener`.
+1. Créez un sous-package qu'on va nommer `listener` (qui contiendra tous nos listeners), puis dans ce sous-package une nouvelle classe nommée `ListenerJoin` qui implémente la classe `Listener`.
 
 2. Créez une fonction de type `void` qui prend en paramètre l'event `PlayerJoinEvent` avec le décorateur `EventHandler`.\
    C'est cette fonction qui sera appelée quand l'événement sera déclenché.\
