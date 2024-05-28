@@ -29,7 +29,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 
 > [!TIP]
 > La version utilisée sera la 1.8.8. Si vous voulez utiliser une version plus récente, récupérez le fichier JAR sur https://getbukkit.org/download/spigot
-> et remplacez le `spigot.jar` présent dans votre serveur (gardez le nom `spigot.jar`‼️). Faites attention à la version de Java à utiliser !
+> et remplacez le `spigot.jar` présent dans votre serveur par le `.jar` que vous venez de télécharger. Faites attention à la version de Java à utiliser !
 
 > [!TIP]
 > Le nom des classes doit s'écrire en `PascalCase`, les packages en `lowercase` et le reste en `camelCase` (nom des variables...)
@@ -40,7 +40,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 
 ## Prérequis
 
--	Minecraft (si vous avez un compte Premium, je vous conseille le launcher [Prism](https://prismlauncher.org/download/linux/), autrement un bon vieux [TLauncher](https://tlauncher.org/jar/))
+-	Minecraft **1.8.8 / 1.8.9** (si vous avez un compte Premium, je vous conseille le launcher [Prism](https://prismlauncher.org/download/linux/), autrement un bon vieux [TLauncher](https://tlauncher.org/jar/))
 -	Java 8 (https://java.com/)
 -	L'IDE Eclipse (https://www.eclipse.org/downloads/packages/) (ou IntelliJ IDEA 😉)
 
