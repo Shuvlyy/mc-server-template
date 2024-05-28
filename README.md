@@ -40,8 +40,7 @@ Tout ça est faisable sur Linux, macOS et sur Windows, mais les captures d’éc
 
 ## Prérequis
 
--	Minecraft **1.8.8 / 1.8.9** (si vous avez un compte Premium, je vous conseille le launcher [Prism](https://prismlauncher.org/download/linux/), autrement un bon vieux [TLauncher](https://tlauncher.org/jar/))
--	Java 8 (https://java.com/)
+-	Minecraft **1.8.8 / 1.8.9** (je vous conseille le launcher [Prism](https://prismlauncher.org/download/linux/))
 -	L'IDE Eclipse (https://www.eclipse.org/downloads/packages/) (ou IntelliJ IDEA 😉)
 
 > [!CAUTION]
